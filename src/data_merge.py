@@ -24,5 +24,12 @@ class DataMerge:
         
         self.merged = pd.merge(self.merged, self.education, 
                   on = ["Year", "Region code", "Region"], how = "left")
-        self.merged = self.merged.sort_values(by = ["Year", "Region"])
-
+        self.merged = self.merged.sort_values(by = ["Year", "Region code", "Region"])
+    
+    def get_data(self):
+        return self.merged
+    
+    def get_data_for_year(self, year):
+        filtered_data = self.merged[self.merged["Year"] == year]
+        filtered_data = filtered_data.sort_values(by = "Region code")
+        return filtered_data

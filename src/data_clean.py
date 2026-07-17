@@ -25,6 +25,7 @@ class DataClean:
     self.median_pay = self.median_pay.rename(columns = {"Time" : "Year"})
     self.median_pay = self.median_pay.rename(columns = {"Geography" : "Region"})
     self.median_pay = self.median_pay.rename(columns = {"administrative-geography" : "Region code"})
+    self.median_pay.loc[self.median_pay["Region"] == "East", "Region"] = "East of England"
 
     self.median_pay = self.median_pay.sort_values(by = "Year")
   
@@ -49,5 +50,8 @@ class DataClean:
 
     self.education[DataClean.education_colname] = self.education[DataClean.education_colname] / 1000
      
-
+  def get_data_for_year(self, df, year):
+      filtered = df[df["Year"] == year]
+      filtered = filtered.sort_values(by = "Region code")
+      return filtered
 

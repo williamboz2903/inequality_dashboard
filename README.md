@@ -16,7 +16,10 @@ Sources of raw data for code:
 
  Class MyScatterPlot enables us to use 2 of the economic statistics and determine whether there is any form of correlation between them
 
+Chloropleth map
 
 app.py is a streamlit app which displays all the data and possible graphs
 
+
+Initially , there was an issue in merging the data frames. The median pay data had the region "East" for region code "E12000006" , while the inactivity and education data had the region "East of England" for the same region code. This prevetned this region code from being displayed in the merged data , so to fix this "East" was renamed to "East of England" in the cleaned median pay dataframe so the dtaaframes matched.
 
