@@ -1,13 +1,15 @@
 import pandas as pd
 
 class DataMerge:
+    STATS_NONE = 0
     STATS_MEDIAN_PAY = 1
     STATS_INACTIVITY = 2
     STATS_EDUCATION = 3
     
-    SCATTER_PLOT_PAY_VS_INACTIVITY = 4
-    SCATTER_PLOT_PAY_VS_EDUCATION = 5
-    SCATTER_PLOT_INACTIVITY_VS_EDUCATION = 6
+    SCATTER_PLOT_NONE = 4
+    SCATTER_PLOT_PAY_VS_INACTIVITY = 5
+    SCATTER_PLOT_PAY_VS_EDUCATION = 6
+    SCATTER_PLOT_INACTIVITY_VS_EDUCATION = 7
     
     title_pay_vs_inactivity = "Correlation between pay and inactivity"
     title_pay_vs_education = "Correlation between pay and education"
