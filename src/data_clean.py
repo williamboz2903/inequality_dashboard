@@ -7,7 +7,8 @@ class DataClean:
   inactivity_colname = "Inactivity"
   education_title = "Percentage of 19+ with further education skills"
   education_colname = "Education"
-
+  median_pay_std_title = "UK Regional Median Annual Gross Pay std"
+  median_pay_std_colname = "Median Pay std"
   def __init__(self, data_raw):
         self.raw_median_pay = data_raw.median_pay
         self.raw_inactivity = data_raw.inactivity
@@ -17,6 +18,7 @@ class DataClean:
       self.clean_median_pay() 
       self.clean_inactivity()
       self.clean_education()
+
 
   def clean_median_pay(self):
     self.median_pay = self.raw_median_pay[["v4_2", "Time", "administrative-geography" , "Geography" ]]

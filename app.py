@@ -6,6 +6,8 @@ from src.data_clean import DataClean
 from src.data_merge import DataMerge
 from src.menu import MyMenu
 from src.graph_manager import GraphManager
+from src.analysis import MyAnalysis
+
 
 st.title("Economic Dashboard") 
 
@@ -21,6 +23,13 @@ clean_data.clean()
 merge_data = DataMerge(clean_data)
 merge_data.merge()
 
+#cov_df = merge_data.get_cov_for_statistic(DataMerge.STATS_MEDIAN_PAY)
+#st.write(cov_df)
+
+#my_line_graph = px.line(cov_df , x = "Year", y = "cov", 
+                   # title = "Coefficient of variation" )
+  
+#st.plotly_chart(my_line_graph)
 # Creates the Menu options
 my_menu = MyMenu()
 my_menu.show()
@@ -39,17 +48,22 @@ year = my_menu.get_year()
 
 # Use GraphManager to display the correct graph, depending on the options.
 # We will display a blank graph if user hasn't entered sufficient info
-graph_manager = GraphManager()
+graph_manager = GraphManager(merge_data)
+
+analysis = MyAnalysis(statistic, scatter_plot)
 
 if graph_type == MyMenu.GRAPH_TYPE_MAP:
   my_map = graph_manager.get_map(merge_data, statistic, year)
   if my_map is not None:
     st.plotly_chart(my_map.map)
+    st.write(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_LINE:
-  my_line = graph_manager.get_line_graph(merge_data, statistic)
-  if my_line is not None:
-    st.plotly_chart(my_line.line_graph)
+  my_line_graph_list = graph_manager.get_line_graph(merge_data, statistic)
+  for my_graph in my_line_graph_list:
+      st.plotly_chart(my_graph.line_graph)
+  st.markdown(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_SCATTER_PLOT:
   my_scatter_plot = graph_manager.get_scatter_plot(merge_data, scatter_plot)
   if my_scatter_plot is not None:
     st.plotly_chart(my_scatter_plot.scatter_graph)
+    st.markdown(analysis.get_analysis())
