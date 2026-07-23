@@ -53,15 +53,17 @@ graph_manager = GraphManager(merge_data)
 analysis = MyAnalysis(statistic, scatter_plot)
 
 if graph_type == MyMenu.GRAPH_TYPE_MAP:
-  my_map = graph_manager.get_map(merge_data, statistic, year)
-  if my_map is not None:
+  my_map_list = graph_manager.get_map(merge_data, statistic, year)
+  for my_map in my_map_list:
     st.plotly_chart(my_map.map)
-    st.write(analysis.get_analysis())
+  if len(my_map_list) > 0:
+    st.markdown(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_LINE:
   my_line_graph_list = graph_manager.get_line_graph(merge_data, statistic)
   for my_graph in my_line_graph_list:
       st.plotly_chart(my_graph.line_graph)
-  st.markdown(analysis.get_analysis())
+  if len(my_line_graph_list) > 0:
+    st.markdown(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_SCATTER_PLOT:
   my_scatter_plot = graph_manager.get_scatter_plot(merge_data, scatter_plot)
   if my_scatter_plot is not None:

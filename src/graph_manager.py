@@ -16,7 +16,7 @@ class GraphManager:
     def get_line_graph(self, merge_data, statistic):
         graph_list = []
         if statistic == DataMerge.STATS_MEDIAN_PAY:
-            pay_graph = MyLineGraph(DataMerge.STATS_MEDIAN_PAY, merge_data.merged, "Year", DataClean.median_pay_colname , 
+            pay_graph = MyLineGraph(DataMerge.STATS_MEDIAN_PAY, merge_data.merged, "Year", DataClean.median_pay_percent_change_colname , 
                                    "Region", DataClean.median_pay_title)
             graph_list.append(pay_graph)
             
@@ -69,21 +69,35 @@ class GraphManager:
             return None
     
     def get_map(self, merge_data, statistic, year):
-        
+        map_list = []
         if year == 0:
-            return None
+            return map_list
         map_data = merge_data.get_data_for_year(year)
     
+        map_data_latest = merge_data.get_data_for_year(2023)
         if statistic == DataMerge.STATS_MEDIAN_PAY:
-            map1 = MyMap(map_data, DataClean.median_pay_colname)
-            return map1
+            map1 = MyMap(map_data, DataClean.median_pay_percent_change_colname , """% change since 2016""" , #
+                         """% change in annual median gross pay since 2016""")
+            map_list.append(map1)
+            map1_latest = MyMap(map_data_latest, DataClean.median_pay_colname, "Median pay for regions in 2023",
+                                "Annual median gross pay in 2023 across UK regions")
+            map_list.append(map1_latest)
+            return map_list
         elif statistic == DataMerge.STATS_INACTIVITY:
-            map2 = MyMap(map_data, DataClean.inactivity_colname)
-            return map2
+            map2 = MyMap(map_data, DataClean.inactivity_percent_change_colname , """% change since 2016""" 
+                         , """ % change in economic inactivity rate since 2016""")
+            map_list.append(map2)
+            map2_latest = MyMap(map_data_latest, DataClean.inactivity_colname,
+            "Inactivity for regions in 2023" ,
+            "Economic inactivity rate in 2023 across Uk regions"
+            )
+            map_list.append(map2_latest)
+            return map_list
         elif statistic == DataMerge.STATS_EDUCATION:
             map3 = MyMap(map_data, DataClean.education_colname)
-            return map3
+            map_list.append(map3)
+            return map_list
         else:
-            return None
+            return map_list
 
 
