@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 # This class is responsible for loading pandas dataframes for each
 # of the economic statistics analysed 
 # All the raw data for these statistics was downloaded from the ONS 

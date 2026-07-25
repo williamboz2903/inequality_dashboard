@@ -1,55 +1,44 @@
-import streamlit as st 
-import pandas as pd 
-import plotly.express as px 
-from src.data_raw import DataRaw
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+
+from src.analysis import MyAnalysis
 from src.data_clean import DataClean
 from src.data_merge import DataMerge
-from src.menu import MyMenu
+from src.data_raw import DataRaw
 from src.graph_manager import GraphManager
-from src.analysis import MyAnalysis
+from src.menu import MyMenu
 
+#Gives a title on streamlit site
+st.title("UK Regional Inequality Dashboard") 
 
-st.title("Economic Dashboard") 
-
-# loads the raw data
+# loads the raw data from the ONS using DataRaw class
 raw_data = DataRaw()
 raw_data.load()
 
-# cleans up the data 
+# cleans up the data using the DataClean class
 clean_data = DataClean(raw_data)
 clean_data.clean()
 
-# merges the data
+# merges the data using the DataMerge class to allow scatter plots
 merge_data = DataMerge(clean_data)
 merge_data.merge()
 
-#cov_df = merge_data.get_cov_for_statistic(DataMerge.STATS_MEDIAN_PAY)
-#st.write(cov_df)
-
-#my_line_graph = px.line(cov_df , x = "Year", y = "cov", 
-                   # title = "Coefficient of variation" )
-  
-#st.plotly_chart(my_line_graph)
-# Creates the Menu options
+# Creates the sidebar menu options in streamlit
 my_menu = MyMenu()
 my_menu.show()
 
-# Get the menu options chosen
+# Get the menu options chosen by the user
 graph_type = my_menu.get_graph_type()
 statistic = my_menu.get_graph_statistic()
 scatter_plot = my_menu.get_scatter_plot_type()
 year = my_menu.get_year()
 
-# st.write(my_menu.get_selections())
-# st.write("Graph Type: " + str(graph_type))
-# st.write("Statistic: " + str(statistic))
-# st.write("Scatter Plot: " + str(scatter_plot))
-# st.write("Year: " + str(year))
-
 # Use GraphManager to display the correct graph, depending on the options.
 # We will display a blank graph if user hasn't entered sufficient info
 graph_manager = GraphManager(merge_data)
 
+#provides written economic analysis for chosen graph/map
 analysis = MyAnalysis(statistic, scatter_plot)
 
 if graph_type == MyMenu.GRAPH_TYPE_MAP:

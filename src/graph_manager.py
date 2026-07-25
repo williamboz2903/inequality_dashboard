@@ -1,5 +1,3 @@
-import streamlit as st
-import pandas as px
 from src.data_merge import DataMerge
 from src.graphs import MyLineGraph
 from src.data_clean import DataClean
@@ -7,12 +5,17 @@ from src.graphs import MyScatterPlot
 from src.map import MyMap
 from src.graphs import MyCovLineGraph
 
-class GraphManager:
 
+# This class is responsible for returning the correct list of graphs/maps/scatter plot 
+# to be displayed fpr each statistics type
+class GraphManager:
 
     def __init__(self, merge_data):
         self.merge_data = merge_data
 
+    # This method calls up a line graph for one of the statistics
+    # It shows both a line graph of the actual values , colour coded by region
+    # It also displays a graph showing the coefficient of variation across the years for that statistic
     def get_line_graph(self, merge_data, statistic):
         graph_list = []
         if statistic == DataMerge.STATS_MEDIAN_PAY:
@@ -46,7 +49,9 @@ class GraphManager:
             return graph_list
         else:
             return graph_list
-        
+
+    # This method displays the correct scatter plot depending on the 
+    # two statistics we wish to examine the correlation between
     def get_scatter_plot(self, merge_data, scatter_plot_type):
         if scatter_plot_type == DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY:
             scatter_plot = MyScatterPlot(DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY , merge_data.merged
@@ -67,7 +72,11 @@ class GraphManager:
             return scatter_plot
         else:
             return None
-    
+
+    # This method returns a list of maps 
+    # The first map shows the % change for the statistic across each region from 2016
+    # to a user selected year
+    # The second map simply shows the values for each region in 2023 (latest year)
     def get_map(self, merge_data, statistic, year):
         map_list = []
         if year == 0:
@@ -76,8 +85,8 @@ class GraphManager:
     
         map_data_latest = merge_data.get_data_for_year(2023)
         if statistic == DataMerge.STATS_MEDIAN_PAY:
-            map1 = MyMap(map_data, DataClean.median_pay_percent_change_colname , """% change since 2016""" , #
-                         """% change in annual median gross pay since 2016""")
+            map1 = MyMap(map_data, DataClean.median_pay_percent_change_colname , """% change since 2016""" , 
+                         ("""% change in annual median gross pay from 2016 to """ + str(year)))
             map_list.append(map1)
             map1_latest = MyMap(map_data_latest, DataClean.median_pay_colname, "Median pay for regions in 2023",
                                 "Annual median gross pay in 2023 across UK regions")
@@ -85,7 +94,7 @@ class GraphManager:
             return map_list
         elif statistic == DataMerge.STATS_INACTIVITY:
             map2 = MyMap(map_data, DataClean.inactivity_percent_change_colname , """% change since 2016""" 
-                         , """ % change in economic inactivity rate since 2016""")
+                         , """ % change in economic inactivity rate from 2016 to """ + str(year))
             map_list.append(map2)
             map2_latest = MyMap(map_data_latest, DataClean.inactivity_colname,
             "Inactivity for regions in 2023" ,

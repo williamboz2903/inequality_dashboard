@@ -1,5 +1,6 @@
 from src.data_merge import DataMerge
 
+
 class MyAnalysis:
     ANALYSIS_STATS_MEDIAN_PAY = """This line graph illustrates the change in median annual gross pay across the regions of the UK between 2016 and 2023.
 Across all the regions , we can see that median pay has grown across all regions , with most regions seeing an increase between £7000 and £8000 between 2016 to 2023.

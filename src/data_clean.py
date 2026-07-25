@@ -1,8 +1,13 @@
 import pandas as pd
+import plotly.express as px
 import streamlit as st
 
-#This class is responsible for removing unnecessary columns from the raw data 
-#
+
+#This class is responsible for removing unnecessary columns from the raw data , standardising the column names
+#in order to allow us to later merge the dataframes into one
+# The common columns are "Year" , "Region", "Region code"
+# Additionally , we calculate the percent change between a given year and the initial year for each region
+# for each seperate dataframe
 
 class DataClean:
   # These are class variables to store column names and titles for each of the statistics that 
@@ -48,7 +53,12 @@ class DataClean:
     self.median_pay = self.median_pay.rename(columns = {"Geography" : "Region"})
     self.median_pay = self.median_pay.rename(columns = {"administrative-geography" : "Region code"})
     self.median_pay.loc[self.median_pay["Region"] == "East", "Region"] = "East of England"
+    
 
+    # This section is used to create a series that shows the initial pay across each region
+    # This intial pay is then used to calculate the percentage change difference 
+    # from the starting year for different year
+    # We will later plot this data on a map
     self.median_pay = self.median_pay.sort_values(["Region code", "Year"])
     # Get the first year's value for each region
     initial_pay = self.median_pay.groupby("Region code")[DataClean.median_pay_colname].transform("first")
@@ -66,6 +76,8 @@ class DataClean:
   # e.g We use column names "Year" , "Region" , "Region code"
   # With this dataframe , the year was included a day and a month , so we simplified to just represent 
   # the year for consistency with the other dataframes and allowing us to merge them.
+  # This dataframe started at 2004 , so we have to ammend it so it starts at 2016
+  # to allow us to later merge it with the other dataframes
   # We then sort all the values by ascending year
 
 
@@ -77,6 +89,16 @@ class DataClean:
     self.inactivity = self.inactivity.rename(columns = {"value" : DataClean.inactivity_colname})
     self.inactivity["Year"] = self.inactivity["Year"].str[:4]
     self.inactivity["Year"] = self.inactivity["Year"].astype(int)
+    self.inactivity = self.inactivity[~self.inactivity["Year"].isin([2004, 2005, 2006, 2007, 2008
+                                                                     , 2009, 2010, 2011, 2012, 2013, 2014
+                                                                     , 2015
+                                                                     ])]
+
+    
+    # This section is used to create a series that shows the initial inactivity across each region
+    # This intial inactivity is then used to calculate the percentage change difference 
+    # from the starting year for different year
+    # We will later plot this data on a map
 
     self.inactivity = self.inactivity.sort_values(["Region code", "Year"])
     # Get the first year's value for each region
