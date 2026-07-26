@@ -9,6 +9,7 @@ class MyMenu:
     GRAPH_TYPE_LINE = 1
     GRAPH_TYPE_SCATTER_PLOT = 2
     GRAPH_TYPE_MAP = 3
+    GRAPH_TYPE_BAR_CHART = 4
 
     YEAR_CHOICES_DEFAULT = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"] 
     # This constructor sets the value of each of the menu options to an empty string
@@ -20,10 +21,10 @@ class MyMenu:
     
     #This method handles the display of the streamlit sidebar menu
     def show(self):
-        st.sidebar.title("Customise")
+        st.sidebar.title("Customise Dashboard")
         self.graph_type = st.sidebar.selectbox(
             "Choose an option",
-        ["Line Graph", "Scatter Plot", "Map"])
+        ["Line Graph", "Bar Chart" , "Map" , "Scatter Plot"])
         
         #Only display the individual statistics choices if we are not doing a scatter plot
         placeholder = st.sidebar.empty()
@@ -49,7 +50,7 @@ class MyMenu:
         #Only display a choice of year if looking at map
         year_placeholder = st.sidebar.empty()
 
-        if self.graph_type == "Map":
+        if self.graph_type == "Map" or self.graph_type == "Bar Chart":
             default_year = "2023"
             self.year_selection = st.sidebar.selectbox(
             "Choose a Year",
@@ -71,7 +72,9 @@ class MyMenu:
         elif self.graph_type == "Line Graph":
             return MyMenu.GRAPH_TYPE_LINE
         elif self.graph_type == "Scatter Plot":
-          return MyMenu.GRAPH_TYPE_SCATTER_PLOT       
+          return MyMenu.GRAPH_TYPE_SCATTER_PLOT      
+        elif self.graph_type == "Bar Chart":
+            return MyMenu.GRAPH_TYPE_BAR_CHART 
         else:
             return MyMenu.GRAPH_TYPE_NONE
     

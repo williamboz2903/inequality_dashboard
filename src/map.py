@@ -14,14 +14,21 @@ class MyMap:
         # the geojson object required by plotly express
         with open("data/raw/rgn2025.geojson") as f:
             myGeoJson = json.load(f)
+
+        min_value = df_year[stats_colName].min()
+        max_value = df_year[stats_colName].max()
+
         # Use the plotly express choropleth map to 
         # plot the statistic given by stats colname and
         # gives the colour bar the title given by my_label
+        # "Turbo" alters the colour scale used on the mpa to make the difference clearer
         self.map = px.choropleth(df_year, 
                     geojson= myGeoJson,
                     locations = "Region code" , 
                     featureidkey = "properties.Region_code", 
                     color = stats_colName ,
+                    range_color=(min_value, max_value),
+                    color_continuous_scale="Turbo",
                     labels = { stats_colName : my_label}
                     )
         # Adds a title to the map

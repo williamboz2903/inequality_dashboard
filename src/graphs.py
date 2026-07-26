@@ -39,6 +39,14 @@ class MyScatterPlot:
         self.scatter_graph = px.scatter(df, x = xCol,
                      y = yCol ,  
                      trendline = "ols" , title = my_title)
+
+#This class will allow us to bar chart with a given title which we 
+# will display along with the map
+class MyBarChart:
+    def __init__(self, df, xCol, yCol, my_title):
+        self.bar_chart = px.bar(df, x = xCol, y = yCol , title = my_title , 
+                                color= yCol,
+                               color_continuous_scale="Turbo")
    
 
     
