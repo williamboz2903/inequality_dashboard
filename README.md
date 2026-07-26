@@ -3,7 +3,7 @@ Sources of raw data for code:
 
  Uk regional economic inactivity rate : (https://www.ons.gov.uk/explore-local-statistics/indicators/economic-inactivity-rate)
 
- Uk regions , people aged 19 and over achieving a funded further education and skills learning aim, per 100,000 people,: (https://www.ons.gov.uk/explore-local-statistics/indicators/further-education-skills-learner-achievements)
+ Labour productivity in £ per hour worked : (https://www.ons.gov.uk/explore-local-statistics/indicators/gross-value-added-per-hour-worked)
 
  Class DataRaw created to be responsible for loading the raw csv data donwladed from the ONS which is held in file data/raw into pandas dataframes
 
@@ -21,8 +21,7 @@ The geojson file , rgn2025.geojson, is included in the project and was downloade
 
 app.py is a streamlit app which displays all the data and possible graphs
 
-
-Initially , there was an issue in merging the data frames. The median pay data had the region "East" for region code "E12000006" , while the inactivity and education data had the region "East of England" for the same region code. This prevetned this region code from being displayed in the merged data , so to fix this "East" was renamed to "East of England" in the cleaned median pay dataframe so the dtaaframes matched.
+Initially , there was an issue in merging the data frames. The median pay data had the region "East" for region code "E12000006" , while the inactivity and productivity data had the region "East of England" for the same region code. This prevented this region code from being displayed in the merged data , so to fix this "East" was renamed to "East of England" in the cleaned median pay dataframe so the dtaaframes matched.
 
 Added menu options to the main page
 
@@ -31,6 +30,5 @@ Added new class GraphManager to decide which graph to be displayed(none if the u
 From the main app , use GraphManager to get the graph and display on streamlit if valid
 
 When loading scatter plots , there will be a few seconds of delay while the regression line is calculated
-
 
 I produced this project using Visual Studio Code and made use of Jupyter notebook plugin to act as a prototype for the project before rearranging it into separate python classes

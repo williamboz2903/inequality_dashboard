@@ -28,10 +28,7 @@ class MyCovLineGraph:
         self.line_graph.update_xaxes(
            dtick = 1 ,
            tickmode = "linear"
-        )
-    
-        if statsType ==  DataMerge.STATS_EDUCATION:
-            self.line_graph.update_xaxes(range=[2019, 2023])    
+        ) 
 
 # This class will allow us to plot scatter plots between two of our economic statistics
 # We will also draw a regression line which will allow us to see if there is any correlation between

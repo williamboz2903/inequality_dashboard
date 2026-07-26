@@ -10,7 +10,7 @@ class MyMenu:
     GRAPH_TYPE_SCATTER_PLOT = 2
     GRAPH_TYPE_MAP = 3
 
-    YEAR_CHOICES_DEFAULT = ["None", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]
+    YEAR_CHOICES_DEFAULT = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"] 
     # This constructor sets the value of each of the menu options to an empty string
     def __init__(self):
         self.graph_type = ""
@@ -20,10 +20,10 @@ class MyMenu:
     
     #This method handles the display of the streamlit sidebar menu
     def show(self):
-        st.sidebar.title("")
+        st.sidebar.title("Customise")
         self.graph_type = st.sidebar.selectbox(
             "Choose an option",
-        ["None", "Line Graph", "Scatter Plot", "Map"])
+        ["Line Graph", "Scatter Plot", "Map"])
         
         #Only display the individual statistics choices if we are not doing a scatter plot
         placeholder = st.sidebar.empty()
@@ -33,7 +33,7 @@ class MyMenu:
         else:
              self.statistic = placeholder.selectbox(
             "Choose a statistic",
-            ["None", "Median Pay", "Inactivity", "Education"])
+            ["Median Pay", "Inactivity", "Productivity"])
 
 
         #Only display the choice of correlation between statistics if we have chosen the scatter plot
@@ -44,15 +44,17 @@ class MyMenu:
         else:
             self.scatter_selection = st.sidebar.selectbox(
             "Choose a scatter plot",
-            ["None", "Median Pay vs Inactivity", "Median Pay vs Education", "Inactivity vs Education"])
+            ["Median Pay vs Productivity", "Median Pay vs Inactivity"])
 
         #Only display a choice of year if looking at map
         year_placeholder = st.sidebar.empty()
 
         if self.graph_type == "Map":
+            default_year = "2023"
             self.year_selection = st.sidebar.selectbox(
             "Choose a Year",
-            MyMenu.YEAR_CHOICES_DEFAULT)
+            MyMenu.YEAR_CHOICES_DEFAULT,
+            index = MyMenu.YEAR_CHOICES_DEFAULT.index(default_year))
             
         else:
             year_placeholder.empty()
@@ -80,8 +82,8 @@ class MyMenu:
             return DataMerge.STATS_MEDIAN_PAY
         elif self.statistic == "Inactivity":
             return DataMerge.STATS_INACTIVITY
-        elif self.statistic == "Education":
-            return DataMerge.STATS_EDUCATION
+        elif self.statistic == "Productivity":
+            return DataMerge.STATS_PRODUCTIVITY
         else:
             return DataMerge.STATS_NONE
     
@@ -90,10 +92,8 @@ class MyMenu:
     def get_scatter_plot_type(self):
         if self.scatter_selection == "Median Pay vs Inactivity":
             return DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY
-        elif self.scatter_selection == "Median Pay vs Education":
-            return DataMerge.SCATTER_PLOT_PAY_VS_EDUCATION
-        elif self.scatter_selection == "Inactivity vs Education":
-            return DataMerge.SCATTER_PLOT_INACTIVITY_VS_EDUCATION
+        elif self.scatter_selection == "Median Pay vs Productivity":
+            return DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY
         else:
             return DataMerge.SCATTER_PLOT_NONE
         

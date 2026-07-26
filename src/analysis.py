@@ -14,11 +14,9 @@ London obviously appears to be a significant outlier compared to the other regio
 Surprisingly , in 2020 , during the pandemic , we see that median pay either only declined slightly or remained stagnant in certain regions.
 """
     ANALYSIS_STATS_INACTIVITY = "Analysis for stats inactivity"
-    ANALYSIS_STATS_EDUCATION = "Analysis for education"
+    
 
     ANALYSIS_PAY_VS_INACTIVITY = "Analysis for pay vs inactivity"
-    ANALYSIS_PAY_VS_EDUCATION = "Analysis for pay vs education"
-    ANALYSIS_INACTIVITY_VS_EDUCATION = "Analysis for inactivity vs education"
 
     def __init__(self, statistic, scatter_plot):
         self.scatter_plot = scatter_plot
@@ -29,14 +27,8 @@ Surprisingly , in 2020 , during the pandemic , we see that median pay either onl
             return MyAnalysis.ANALYSIS_STATS_MEDIAN_PAY
         elif self.statistic == DataMerge.STATS_INACTIVITY:
             return MyAnalysis.ANALYSIS_STATS_INACTIVITY
-        elif self.statistic == DataMerge.STATS_EDUCATION:
-            return MyAnalysis.ANALYSIS_STATS_EDUCATION
         elif self.scatter_plot == DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY:
             return MyAnalysis.ANALYSIS_PAY_VS_INACTIVITY
-        elif self.scatter_plot == DataMerge.SCATTER_PLOT_PAY_VS_EDUCATION:
-            return MyAnalysis.ANALYSIS_PAY_VS_EDUCATION
-        elif self.scatter_plot == DataMerge.SCATTER_PLOT_INACTIVITY_VS_EDUCATION:
-            return MyAnalysis.ANALYSIS_INACTIVITY_VS_EDUCATION
         else:
             return None
 

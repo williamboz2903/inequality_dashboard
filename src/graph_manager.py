@@ -19,7 +19,7 @@ class GraphManager:
     def get_line_graph(self, merge_data, statistic):
         graph_list = []
         if statistic == DataMerge.STATS_MEDIAN_PAY:
-            pay_graph = MyLineGraph(DataMerge.STATS_MEDIAN_PAY, merge_data.merged, "Year", DataClean.median_pay_percent_change_colname , 
+            pay_graph = MyLineGraph(DataMerge.STATS_MEDIAN_PAY, merge_data.merged, "Year", DataClean.median_pay_colname , 
                                    "Region", DataClean.median_pay_title)
             graph_list.append(pay_graph)
             
@@ -39,13 +39,14 @@ class GraphManager:
             graph_list.append(graph_cov)
             return graph_list
 
-        elif statistic == DataMerge.STATS_EDUCATION:
-            education_graph = MyLineGraph(DataMerge.STATS_EDUCATION , merge_data.merged, "Year", DataClean.education_colname , 
-                                   "Region", DataClean.education_title)
-            graph_list.append(education_graph)
-            cov_df = self.merge_data.get_cov_for_statistic(DataMerge.STATS_EDUCATION)
-            graph_cov = MyCovLineGraph(DataMerge.STATS_EDUCATION, cov_df , "Year", "cov", DataClean.education_title)
-            graph_list.append(graph_cov)
+        elif statistic == DataMerge.STATS_PRODUCTIVITY:
+            productivity_graph = MyLineGraph(DataMerge.STATS_PRODUCTIVITY, merge_data.merged, "Year", DataClean.productivity_colname , 
+                                           "Region", DataClean.productivity_title)
+            graph_list.append(productivity_graph)
+                    
+            cov_df = self.merge_data.get_cov_for_statistic(DataMerge.STATS_PRODUCTIVITY)
+            productivity_graph_cov = MyCovLineGraph(DataMerge.STATS_PRODUCTIVITY, cov_df , "Year", "cov", DataClean.productivity_title)
+            graph_list.append(productivity_graph_cov)
             return graph_list
         else:
             return graph_list
@@ -59,17 +60,11 @@ class GraphManager:
                             DataMerge.title_pay_vs_inactivity)
             return scatter_plot
 
-        elif scatter_plot_type == DataMerge.SCATTER_PLOT_PAY_VS_EDUCATION:
-            scatter_plot = MyScatterPlot(DataMerge.SCATTER_PLOT_PAY_VS_EDUCATION , merge_data.merged
-                            , DataClean.education_colname, DataClean.median_pay_colname , 
-                            DataMerge.title_pay_vs_education)
-            return scatter_plot
-        
-        elif scatter_plot_type == DataMerge.SCATTER_PLOT_INACTIVITY_VS_EDUCATION:
-            scatter_plot = MyScatterPlot(DataMerge.SCATTER_PLOT_INACTIVITY_VS_EDUCATION , merge_data.merged
-                            , DataClean.education_colname, DataClean.inactivity_colname , 
-                            DataMerge.title_inactivity_vs_education)
-            return scatter_plot
+        elif scatter_plot_type == DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY:
+                    scatter_plot = MyScatterPlot(DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY , merge_data.merged
+                                   , DataClean.median_pay_colname, DataClean.productivity_colname , 
+                                    DataMerge.title_pay_vs_productivity)
+                    return scatter_plot
         else:
             return None
 
@@ -83,15 +78,16 @@ class GraphManager:
             return map_list
         map_data = merge_data.get_data_for_year(year)
     
-        map_data_latest = merge_data.get_data_for_year(2023)
         if statistic == DataMerge.STATS_MEDIAN_PAY:
-            map1 = MyMap(map_data, DataClean.median_pay_percent_change_colname , """% change since 2016""" , 
+            if year != 2016:
+                map_change = MyMap(map_data, DataClean.median_pay_percent_change_colname , """% change since 2016""" , 
                          ("""% change in annual median gross pay from 2016 to """ + str(year)))
-            map_list.append(map1)
-            map1_latest = MyMap(map_data_latest, DataClean.median_pay_colname, "Median pay for regions in 2023",
-                                "Annual median gross pay in 2023 across UK regions")
-            map_list.append(map1_latest)
+                map_list.append(map_change)
+            map_for_year = MyMap(map_data, DataClean.median_pay_colname, "Median pay for regions in " + str(year) ,
+                                "Annual median gross pay in " + str(year) + " across UK regions")
+            map_list.append(map_for_year)
             return map_list
+        
         elif statistic == DataMerge.STATS_INACTIVITY:
             map2 = MyMap(map_data, DataClean.inactivity_percent_change_colname , """% change since 2016""" 
                          , """ % change in economic inactivity rate from 2016 to """ + str(year))
@@ -102,10 +98,16 @@ class GraphManager:
             )
             map_list.append(map2_latest)
             return map_list
-        elif statistic == DataMerge.STATS_EDUCATION:
-            map3 = MyMap(map_data, DataClean.education_colname)
-            map_list.append(map3)
-            return map_list
+
+        elif statistic == DataMerge.STATS_PRODUCTIVITY:
+                    map1 = MyMap(map_data, DataClean.productivity_percent_change_colname , """% change since 2016""" , 
+                                 ("""% change in productivity (GVA) from 2016 to """ + str(year)))
+                    map_list.append(map1)
+                    map1_latest = MyMap(map_data_latest, DataClean.productivity_colname, "Productivity (GVA) for regions in 2023",
+                                        "Productivity in 2023 across UK regions")
+                    map_list.append(map1_latest)
+                    return map_list
+        
         else:
             return map_list
 

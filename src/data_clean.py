@@ -18,23 +18,23 @@ class DataClean:
   inactivity_title = "Economic inactivity percentage"
   inactivity_colname = "Inactivity"
   inactivity_percent_change_colname = "Percentage change in economic inactivity rate compared to 2016"
-  education_title = "Percentage of 19+ with further education skills"
-  education_colname = "Education"
-  
+  productivity_title = "Labour productivity in £ per hour worked in the UK"
+  productivity_colname = "Productivity"
+  productivity_percent_change_colname = "Percentage change in productivity compared to 2016"
 
   # This constructor takes the DataRaw object which holds the raw pandas dataframes#
   # This stores a copy locally in this class
   def __init__(self, data_raw):
         self.raw_median_pay = data_raw.median_pay
         self.raw_inactivity = data_raw.inactivity
-        self.raw_education = data_raw.education
+        self.raw_productivity = data_raw.productivity
 
   # This method is called from outside the class to initiate the cleaning of the data that is performed in the 
   # rest of this class
   def clean(self):
       self.clean_median_pay() 
       self.clean_inactivity()
-      self.clean_education()
+      self.clean_productivity()
 
   # This method takes the raw data for Uk Median Regional Annual Gross Pay 
   # First , we select only specific columns that we need such as "Time" and "Geography"
@@ -112,17 +112,28 @@ class DataClean:
     self.inactivity = self.inactivity.sort_values(by = "Year")
 
 
+  def clean_productivity(self):
+    self.productivity = self.raw_productivity.rename(columns = {"areacd" : "Region code"})
+    self.productivity = self.productivity.rename(columns = {"areanm" : "Region"})
+    self.productivity = self.productivity.rename(columns = {"period" : "Year"})
+    self.productivity = self.productivity.rename(columns = {"value" : DataClean.productivity_colname})
+    self.productivity["Year"] = self.productivity["Year"].str[:4]
+    self.productivity["Year"] = self.productivity["Year"].astype(int)
+    self.productivity = self.productivity[~self.productivity["Year"].isin([2004, 2005, 2006, 2007, 2008
+                                                                        , 2009, 2010, 2011, 2012, 2013, 2014
+                                                                        , 2015
+                                                                        ])]
+    
+    # This section is used to create a series that shows the initial productivity across each region
+    # This intial productivity is then used to calculate the percentage change difference 
+    # from the starting year for different year
+    # We will later plot this data on a map
+    self.productivity = self.productivity.sort_values(["Region code", "Year"])
+    # Get the first year's value for each region
+    initial_productivity = self.productivity.groupby("Region code")[DataClean.productivity_colname].transform("first")
+    # Calculates cumulative % change from original year
+    self.productivity[DataClean.productivity_percent_change_colname]  = (
+       (self.productivity[DataClean.productivity_colname] - initial_productivity) / initial_productivity  * 100
+    ).round(2)
 
-  def clean_education(self):
-    self.education = self.raw_education.rename(columns= {"period" : "Year"})
-    self.education = self.education.rename(columns = {"areanm": "Region"})
-    self.education = self.education.rename(columns = {"areacd" : "Region code"})
-    self.education = self.education.rename(columns = {"value" : DataClean.education_colname})
-
-    self.education["Year"] = self.education["Year"].str[:4]
-    self.education["Year"] = self.education["Year"].astype(int)
-    self.education = self.education[~self.education["Year"].isin([2024])]
-
-    self.education[DataClean.education_colname] = self.education[DataClean.education_colname] / 1000
-
-
+    self.productivity = self.productivity.sort_values(by = "Year")

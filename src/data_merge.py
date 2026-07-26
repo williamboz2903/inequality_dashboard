@@ -12,23 +12,21 @@ class DataMerge:
     STATS_NONE = 0
     STATS_MEDIAN_PAY = 1
     STATS_INACTIVITY = 2
-    STATS_EDUCATION = 3
+    STATS_PRODUCTIVITY = 3
     
     #These are the correlations between the statistics
-    SCATTER_PLOT_NONE = 4
-    SCATTER_PLOT_PAY_VS_INACTIVITY = 5
-    SCATTER_PLOT_PAY_VS_EDUCATION = 6
-    SCATTER_PLOT_INACTIVITY_VS_EDUCATION = 7
+    SCATTER_PLOT_NONE = 10
+    SCATTER_PLOT_PAY_VS_INACTIVITY = 11
+    SCATTER_PLOT_PAY_VS_PRODUCTIVITY = 12
 
     # We call these when plotting the scatter graphs
     title_pay_vs_inactivity = "Correlation between pay and inactivity"
-    title_pay_vs_education = "Correlation between pay and education"
-    title_inactivity_vs_education = "Correlation between education and inactivity"
+    title_pay_vs_productivity = "Correlation between pay and productivity"
 
     def __init__(self, data_clean):
         self.median_pay = data_clean.median_pay
         self.inactivity = data_clean.inactivity
-        self.education = data_clean.education
+        self.productivity = data_clean.productivity
     
     #This method is responsible for merging the dataframes by "Year", "Region", and "Region Code"
     # For it to be merged successfully , each dataframe must have the same year , region code and region columns
@@ -36,11 +34,11 @@ class DataMerge:
     def merge(self):
         self.merged = pd.merge(self.median_pay, self.inactivity, 
                   on = ["Year", "Region code", "Region"])
-        
-        self.merged = pd.merge(self.merged, self.education, 
-                  on = ["Year", "Region code", "Region"], how = "left")
+
+        self.merged = pd.merge(self.merged, self.productivity, 
+                          on = ["Year", "Region code", "Region"])
         self.merged = self.merged.sort_values(by = ["Year", "Region code", "Region"])
-    
+
     # This method is used to just return the merged data fro a specific year 
     # This will be used when plotting maps
     def get_data_for_year(self, year):
@@ -57,8 +55,8 @@ class DataMerge:
             stats_colname = DataClean.median_pay_colname
         elif statistic == DataMerge.STATS_INACTIVITY:
             stats_colname = DataClean.inactivity_colname
-        elif statistic == DataMerge.STATS_EDUCATION:
-            stats_colname = DataClean.education_colname
+        elif statistic == DataMerge.STATS_PRODUCTIVITY:
+            stats_colname = DataClean.productivity_colname
         # We have to return None if we do not give a valid stastistic parameter
         else:
             stats_colname = None
