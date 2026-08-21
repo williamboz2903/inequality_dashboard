@@ -2,11 +2,56 @@ from src.data_merge import DataMerge
 
 
 class MyAnalysis:
-    ANALYSIS_STATS_MEDIAN_PAY = ""
-    
-    ANALYSIS_STATS_INACTIVITY = ""
+    ANALYSIS_STATS_MEDIAN_PAY = """This line graph illustrates the change in median annual gross pay across the regions of the UK between 2016 and 2023. Across the regions , we can see that median pay has grown for  all of the regions , with most areas seeing an increase between £7000 and £8000 between 2016 to 2023.
 
-    ANALYSIS_STATS_PRODUCTIVITY = ""
+There was stagnation in wage growth during Covid across most regions , and London actually saw a slight fall. However, in spite of the overall increase in the median pay, it has to be noted this does not mean that people across the UK have become significantly wealthier in this time period. 
+
+To start , median pay is a nominal measure which does not account for inflation. In real terms , wages will not have risen by c£7000-£8000, particularly given the high rates of inflation in 2022 following the energy price shock. Some reports have stated that real wages have actually fallen in recent years, so this supposed rise in median wages does not allow us to immediately conclude real wages or living standards have risen in these past 8 years.
+
+Additionally , the use of a median simply finds the middle value between the lowest pay and the highest pay. We have no information about the wage disparity between the highest and lowest. So for example you could see that the poorest people have actually seen their pay fall , while the rest of the population’s pay has risen, the median will still rise overall but we miss the fact that the inequality in pay between the highest and lowest earners has actually risen.
+However , recent reports from the Resolution foundation seem to suggest that the pay gap has actually fallen , primarily driven due to recent increases in the national living wage. As a result of this, perhaps this supposed flaw with the use of the median is not too significant in judging whether all income groups have seen rises in their wages.
+
+London obviously appears to be a significant outlier compared to the other regions of the UK. It often has an annual pay around £7000-8000 higher than the closest region , the South East. Part of this could be extreme outliers , with London obviously being the UK’s main global financial centre, and attracting high talent to the capital where often large , prestigious multinational firms are based, who offer high pay to employ people with skills in high demand. Of course, the higher median pay cannot immediately allow us to conclude that standards of living and general quality of life is higher in London compared to other regions. To start, the cost of living in London is significantly higher than most areas of the UK. The affordability ratio (house prices to earnings) of London is about 10.6 in 2025. In comparison , the North East’s average affordability ratio was 5.0 (1). As such, although may have the highest median pay, it may be suggested that given London’s affordability crisis, people living in the North East 
+The coefficient of variation(COV) acts as a measure of how spread out the data is. The higher the coefficient of variation , the greater the range in values above or below the mean value, which signals a higher level of regional inequality.
+For median pay , we see the coefficient of variation initially starting at about 13.4 . Given that the main line graph already shows London as a significant outlier compared to the rest of the UK’s regions , this is unsurprising. Significantly, although we see a rise in the COV between 2016 to 2018, the general trend is a fall in the COV, decreasing to under 12 by 2023. 
+However, we must be careful with what the Coefficient of variation is expressing. It is simply the standard deviation / mean. Given the fact that the mean has risen over the time period , this means the denominator will be larger, and therefore lead to the value of the COV falling, even if the actual regional inequality remains the same or has actually worsened. As such, the declining value of the COV likely does not indicate a fall in regional inequality for median pay, but rather just an effect of a change in the overall mean.
+
+The range (highest - lowest value) of the data in 2016 is around £10500 (London - Wales). Compare this to 2023 where the range is £12 . This suggests that actually the inequality in median pay has worsened over the selected timespan. 
+We must be careful with what the Coefficient of variation is expressing. It is simply the standard deviation / mean. Given the fact that the mean has risen over the time period , this means the denominator will be larger, and therefore lead to the value of the COV falling, even if the actual regional inequality remains the same or has actually worsened.
+
+Sources: 
+1 - https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2025#housing-affordability-in-england-and-wales
+"""
+    
+    ANALYSIS_STATS_INACTIVITY = """This line graph shows the rate of economic inactivity across each of the UK’s regions. 
+Economic inactivity should not be confused with unemployment. The unemployment rate calculates the number of people who are out of work but searching for work as a proportion of the Labour force (Employed + Unemployed). The economic inactivity rate measures the number of people out of work but NOT searching for new employment , often due to  reasons such as caring responsibilities , long-term sickness or early retirement as a proportion of the total working age population. Recent reports have stated that the UK has  9.1 million people being classed as economically inactive in 2026.(1)
+
+The inactivity rate across the years has been very volatile for all the regions. London for instance saw a 0.9% rise between 2022 and 2023. The West Midlands appears to have seen the most significant improvement , falling from an inactivity rate of 24.6% down to 21.2%. In comparison, the North East saw small rises and falls, and by 2023 it has only seen the inactivity rate decrease by 0.3%. This indicates there has not been uniformity in how each of the region;’s inactivity rates have changed across the 8 years.
+
+The graph does show that with the exception of 2019-2020, the North East consistently had the highest rate of economic inactivity, peaking at 26% in 2022.One could make the argument that given the deindustrialisation that occurred primarily in North East England during the 1980s, as there was a sharp rise in unemployment , we might also expect to see a permanent increase in economic inactivity. Deindutrialisation resulted in more structurally unemployed workers, where they did not have sufficient skills to be able to transfer to say the growing service sector. If they remained unemployed for longer periods, they may have decided to give up on seeking a new job, resulting in them becoming economically inactive. The service sector is also primarily focused in London and the South East, so it is possible that geographical immobility of labour, where factors like poor transport links prevent workers from moving to new areas for employment, contributed to a consistently higher economic inactivity rate in the North East than compared to the South East.
+
+
+
+Interestingly , we see that the coefficient of variation ranges between 9 and 10.5, substantially lower than the coefficients for median pay and productivity. This could therefore suggest that there is a lower regional inequality when it comes to the inactivity rate across the UK’s different regions. Yet, we need to be careful with jumping to this conclusion 
+
+
+Sources:
+1: https://commonslibrary.parliament.uk/the-uk-labour-market/
+"""
+
+    ANALYSIS_STATS_PRODUCTIVITY = """This line graph shows the changes to labour productivity across each of the UK’s regions. Productivity is a measure of essentially how much output is produced in a given period of time. If we hold all of our inputs constant, but a worker’s productivity rises, output will increase despite no change in inputs. Higher productivity levels lead to more goods and services being produced by the economy , often leading to real GDP growth.
+The data shows that broadly all of the regions experienced a gradual improvement in their levels of productivity between 2016 and 2023. Normally , economists tend to associate improvements to productivity as being down to perhaps improved skills training , reducing geographical immobility of labour (for example , improving transport infrastructure in rural areas so it is easier for people to access areas with better employment opportunities). Most importantly, a rise in the total factor productivity of the economy (z), which signifies technological process such as the implementation of artificial intelligence perhaps, is likely to cause significant productivity increases.
+
+The data shows that once again, London is a significant outlier, usually being around 9 points higher than the closest region, the South East.
+
+The range is quite large here. By the end of the period, the range was almost 19 points (London - Wales), indicating a very significant productivity gap. London’s productivity was 1–% that of Wales, showing just how severe the inequality in productivity rates are across the UK’s regions However, if we think about the 
+London acts as the UK’s financial centre and the main focus of multinational corporations. By contrast, Wales remains fairly agricultural, and is more reliant on sectors like tourism which do not use so much capital, likely leading to lower levels of productivity.
+
+There have been numerous reports since the Global Financial Crisis in 2008 that the UK has a severe issue with productivity. Since 2008, UK productivity has effectively flatlined, with average productivity growth being 0.6% between 2009 to 2023. In contrast, between 1971-2007, UK productivity growth was 2.2% [1]. There have been a multitude of reasons, ranging from frequent economic shocks like Brexit and COVID, 
+
+Sources:
+1 - https://post.parliament.uk/economic-growth-and-productivity/
+"""
     
 
     ANALYSIS_PAY_VS_INACTIVITY = """This scatter plot has a regression line that slopes downwards , indicating that there is a weak negative correlation.This implies that as median pay increases
@@ -45,7 +90,7 @@ Ultimately, while we definitely need to be aware of some potential problems with
         elif self.statistic == DataMerge.STATS_INACTIVITY:
             return MyAnalysis.ANALYSIS_STATS_INACTIVITY
         elif self.statistic == DataMerge.STATS_PRODUCTIVITY:
-            return MyAnalysis.AN
+            return MyAnalysis.ANALYSIS_STATS_PRODUCTIVITY
         elif self.scatter_plot == DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY:
             return MyAnalysis.ANALYSIS_PAY_VS_INACTIVITY
         elif self.scatter_plot == DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY:
