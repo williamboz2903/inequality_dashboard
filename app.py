@@ -51,15 +51,24 @@ if graph_type == MyMenu.GRAPH_TYPE_MAP:
     st.markdown(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_LINE:
   my_line_graph_list = graph_manager.get_line_graph_list(merge_data, statistic)
-  for my_graph in my_line_graph_list:
-      st.plotly_chart(my_graph.line_graph)
+
+   # Normal line graph
   if len(my_line_graph_list) > 0:
-    st.markdown(analysis.get_analysis())
+        st.plotly_chart(my_line_graph_list[0].line_graph)
+        st.markdown(analysis.get_line_analysis())
+
+    # Coefficient of variation graph
+  if len(my_line_graph_list) > 1:
+        st.plotly_chart(my_line_graph_list[1].line_graph)
+        st.markdown(analysis.get_cov_analysis())
+
+        st.markdown(analysis.get_cov_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_SCATTER_PLOT:
   my_scatter_plot = graph_manager.get_scatter_plot(merge_data, scatter_plot)
   if my_scatter_plot is not None:
     st.plotly_chart(my_scatter_plot.scatter_graph)
-    st.markdown(analysis.get_analysis())
+    
+    st.markdown(analysis.get_scatter_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_BAR_CHART:
   my_bar_chart_list = graph_manager.get_bar_chart_list(merge_data, statistic, year)
   for my_bar_chart in my_bar_chart_list:

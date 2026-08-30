@@ -1,6 +1,7 @@
 import plotly.express as px
-
+import statsmodels.api as sm
 from src.data_merge import DataMerge
+from scipy.stats import linregress
 
 
 # This class allows us to plot a line graph using plotly express to show
@@ -39,6 +40,8 @@ class MyScatterPlot:
         self.scatter_graph = px.scatter(df, x = xCol,
                      y = yCol ,  
                      trendline = "ols" , title = my_title)
+        self.result = linregress(xCol, yCol)
+
 
 #This class will allow us to bar chart with a given title which we 
 # will display along with the map
