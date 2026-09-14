@@ -25,7 +25,7 @@ class GraphManager:
             graph_list.append(pay_graph)
             
             cov_df = self.merge_data.get_cov_for_statistic(DataMerge.STATS_MEDIAN_PAY)
-            pay_graph_cov = MyCovLineGraph(DataMerge.STATS_MEDIAN_PAY, cov_df , "Year", "cov", DataClean.median_pay_title)
+            pay_graph_cov = MyCovLineGraph(DataMerge.STATS_MEDIAN_PAY, cov_df , "Year", "CV", DataClean.median_pay_title)
             graph_list.append(pay_graph_cov)
             return graph_list
         
@@ -36,7 +36,7 @@ class GraphManager:
             
             graph_list.append(inactivity_graph)
             cov_df = self.merge_data.get_cov_for_statistic(DataMerge.STATS_INACTIVITY)
-            graph_cov = MyCovLineGraph(DataMerge.STATS_INACTIVITY, cov_df , "Year", "cov", DataClean.inactivity_title)
+            graph_cov = MyCovLineGraph(DataMerge.STATS_INACTIVITY, cov_df , "Year", "CV", DataClean.inactivity_title)
             graph_list.append(graph_cov)
             return graph_list
 
@@ -46,7 +46,7 @@ class GraphManager:
             graph_list.append(productivity_graph)
                     
             cov_df = self.merge_data.get_cov_for_statistic(DataMerge.STATS_PRODUCTIVITY)
-            productivity_graph_cov = MyCovLineGraph(DataMerge.STATS_PRODUCTIVITY, cov_df , "Year", "cov", DataClean.productivity_title)
+            productivity_graph_cov = MyCovLineGraph(DataMerge.STATS_PRODUCTIVITY, cov_df , "Year", "CV", DataClean.productivity_title)
             graph_list.append(productivity_graph_cov)
             return graph_list
         else:

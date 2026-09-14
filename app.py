@@ -47,8 +47,6 @@ if graph_type == MyMenu.GRAPH_TYPE_MAP:
   my_map_list = graph_manager.get_map_list(merge_data, statistic, year)
   for my_map in my_map_list:
     st.plotly_chart(my_map.map)
-  if len(my_map_list) > 0:
-    st.markdown(analysis.get_analysis())
 elif graph_type == MyMenu.GRAPH_TYPE_LINE:
   my_line_graph_list = graph_manager.get_line_graph_list(merge_data, statistic)
 
@@ -70,5 +68,3 @@ elif graph_type == MyMenu.GRAPH_TYPE_BAR_CHART:
   my_bar_chart_list = graph_manager.get_bar_chart_list(merge_data, statistic, year)
   for my_bar_chart in my_bar_chart_list:
     st.plotly_chart(my_bar_chart.bar_chart)
-  if len(my_bar_chart_list) > 0:
-    st.markdown(analysis.get_analysis())

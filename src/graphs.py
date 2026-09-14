@@ -1,7 +1,7 @@
 import plotly.express as px
 import statsmodels.api as sm
 from src.data_merge import DataMerge
-from scipy.stats import linregress
+
 
 
 # This class allows us to plot a line graph using plotly express to show
@@ -21,7 +21,7 @@ class MyLineGraph:
 #This class allows us to plot a line graph that shows the coefficient of variation for each statistic
 # representing the range of values between the regions across the years 
 class MyCovLineGraph:
-    def __init__(self, statsType ,df, xCol, yCol, title):#
+    def __init__(self, statsType ,df, xCol, yCol, title):
         title = title + " (Coefficient of Variation)"
         self.line_graph = px.line(df , x = xCol, y = yCol, 
                     title = title  )
@@ -40,8 +40,7 @@ class MyScatterPlot:
         self.scatter_graph = px.scatter(df, x = xCol,
                      y = yCol ,  
                      trendline = "ols" , title = my_title)
-        self.result = linregress(xCol, yCol)
-
+        self.results = px.get_trendline_results(self.scatter_graph)
 
 #This class will allow us to bar chart with a given title which we 
 # will display along with the map

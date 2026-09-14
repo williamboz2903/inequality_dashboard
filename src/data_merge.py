@@ -74,7 +74,7 @@ class DataMerge:
 
             cov_df ["covraw"] = cov_df["StdDev"] / cov_df["Mean"]
 
-            cov_df ["cov"] = cov_df["covraw"] * 100 
+            cov_df ["CV"] = cov_df["covraw"] * 100 
 
             return cov_df
         else:
