@@ -18,7 +18,10 @@ London obviously appears to be a significant outlier compared to the other regio
 
 Sources
 
+Raw data: https://www.ons.gov.uk/filters/412e9c37-c103-4622-ab45-1efe6bf0d15b/dimensions
+
 [1] https://www.bbc.co.uk/news/articles/c17rgd8e9gjo
+ 
 [2] https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2025#housing-affordability-in-england-and-wales
 """
 
@@ -35,6 +38,8 @@ The inactivity rate across the years has been very volatile for all the regions.
 The graph does show that, with the exception of 2019-2020, the North East consistently had the highest rate of economic inactivity, peaking at 26% in 2022. One could make the argument that given the deindustrialisation that occurred primarily in North East England during the 1980s, as there was a sharp rise in unemployment, we might also expect to see a permanent increase in economic inactivity. Deindustrialisation resulted in more structurally unemployed workers, where they did not have sufficient skills to be able to transfer to say the growing service sector. If they remained unemployed for longer periods, they may have decided to give up on seeking a new job, resulting in them becoming economically inactive. The service sector is also primarily focused in London and the South East, so it is possible that geographical immobility of labour, where factors like poor transport links prevent workers from moving to new areas for employment, contributed to a consistently higher economic inactivity rate in the North East compared to the South East.
 
 Sources
+
+Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/economic-inactivity-rate
 
 [1] https://commonslibrary.parliament.uk/the-uk-labour-market/
 
@@ -57,7 +62,10 @@ Additionally, the range is quite large here. By the end of the period, the range
 London acts as the UK’s financial centre and the main focus of multinational corporations. These are often sectors employing highly skilled workers who use large levels of capital like computers and artificial intelligence to boost their productivity. By contrast, Wales remains fairly agricultural, and is more reliant on sectors like tourism which do not use so much capital, likely leading to lower levels of productivity as there is a much lower ratio between labour and capital in these sorts of sectors. As a result of this, it is unsurprising the productivity gap is so large, indicating that there needs to be some effective Government policy if this regional inequality is to be reduced, as market forces do not seem to be capable of solving this issue.  
 
 Sources:
-1 - https://post.parliament.uk/economic-growth-and-productivity/
+
+Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/gross-value-added-per-hour-worked
+
+[1] https://post.parliament.uk/economic-growth-and-productivity/
 
 """
 
