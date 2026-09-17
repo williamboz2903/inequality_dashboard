@@ -20,8 +20,8 @@ class DataMerge:
     SCATTER_PLOT_PAY_VS_PRODUCTIVITY = 12
 
     # We call these when plotting the scatter graphs
-    title_pay_vs_inactivity = "Correlation between pay and inactivity"
-    title_pay_vs_productivity = "Correlation between pay and productivity"
+    title_pay_vs_inactivity = "Correlation between Inactivity and Median Pay"
+    title_pay_vs_productivity = "Correlation between Median Pay and Productivity"
 
     def __init__(self, data_clean):
         self.median_pay = data_clean.median_pay

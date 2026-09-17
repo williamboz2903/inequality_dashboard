@@ -45,7 +45,7 @@ class MyMenu:
         else:
             self.scatter_selection = st.sidebar.selectbox(
             "Choose a scatter plot",
-            ["Median Pay vs Productivity", "Median Pay vs Inactivity"])
+            ["Median Pay vs Productivity", "Inactivity vs Median Pay"])
 
         #Only display a choice of year if looking at map
         year_placeholder = st.sidebar.empty()
@@ -93,7 +93,7 @@ class MyMenu:
     #This method translates the correlation string retunred from the streamnlit select box
     # into a constant class attribute
     def get_scatter_plot_type(self):
-        if self.scatter_selection == "Median Pay vs Inactivity":
+        if self.scatter_selection == "Inactivity vs Median Pay":
             return DataMerge.SCATTER_PLOT_PAY_VS_INACTIVITY
         elif self.scatter_selection == "Median Pay vs Productivity":
             return DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY

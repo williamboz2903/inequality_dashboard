@@ -63,7 +63,7 @@ class GraphManager:
 
         elif scatter_plot_type == DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY:
                     scatter_plot = MyScatterPlot(DataMerge.SCATTER_PLOT_PAY_VS_PRODUCTIVITY , merge_data.merged
-                                   , DataClean.median_pay_colname, DataClean.productivity_colname , 
+                                   , DataClean.productivity_colname, DataClean.median_pay_colname, 
                                     DataMerge.title_pay_vs_productivity)
                     return scatter_plot
         else:
