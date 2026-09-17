@@ -2,7 +2,9 @@ from src.data_merge import DataMerge
 
 
 class MyAnalysis:
-    ANALYSIS_STATS_MEDIAN_PAY = """This line graph illustrates the change in median annual gross pay across the regions of the UK between 2016 and 2023. Comparing the different areas, we can see that median pay has grown for  all of the regions, with most areas seeing an increase between £7000 and £8000 between 2016 to 2023.
+    ANALYSIS_STATS_MEDIAN_PAY = """ Raw data: https://www.ons.gov.uk/filters/412e9c37-c103-4622-ab45-1efe6bf0d15b/dimensions
+    
+This line graph illustrates the change in median annual gross pay across the regions of the UK between 2016 and 2023. Comparing the different areas, we can see that median pay has grown for  all of the regions, with most areas seeing an increase between £7000 and £8000 between 2016 to 2023.
 
 The range (highest - lowest value) of the data in 2016 is around £10,500 (London - Wales). Compare this to 2023 where the range is £12000 . This suggests that actually the inequality in median pay has worsened over the selected timespan. 
 
@@ -18,8 +20,6 @@ London obviously appears to be a significant outlier compared to the other regio
 
 Sources
 
-Raw data: https://www.ons.gov.uk/filters/412e9c37-c103-4622-ab45-1efe6bf0d15b/dimensions
-
 [1] https://www.bbc.co.uk/news/articles/c17rgd8e9gjo
  
 [2] https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/2025#housing-affordability-in-england-and-wales
@@ -30,7 +30,9 @@ For median pay, we see the coefficient of variation initially starting at about 
 However, we must be careful with what the coefficient of variation is expressing. It is simply the standard deviation / mean. Given the fact that the mean has risen over the time period, this means the denominator will be larger, and therefore lead to the value of the CV falling, even if the actual regional inequality remains the same or has actually worsened. As such, it is likely that the declining value of the CV does not indicate a fall in regional inequality for median pay, but rather just an effect of a change in the overall mean.
  """
 
-    ANALYSIS_STATS_INACTIVITY = """This line graph shows the rate of economic inactivity across each of the UK’s regions. 
+    ANALYSIS_STATS_INACTIVITY = """ Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/economic-inactivity-rate
+
+This line graph shows the rate of economic inactivity across each of the UK’s regions. 
 Economic inactivity should not be confused with unemployment. The unemployment rate calculates the number of people who are out of work but searching for work as a proportion of the labour force (Employed + Unemployed). The economic inactivity rate measures the number of people out of work but NOT searching for new employment, often due to reasons such as caring responsibilities, long-term sickness or early retirement as a proportion of the total working age population. Recent reports have stated that the UK has 9.1 million people being classed as economically inactive in 2026. [1]
 
 The inactivity rate across the years has been very volatile for all the regions. London, for instance, saw a 0.9% rise between 2022 and 2023. The West Midlands appears to have seen the most significant improvement, falling from an inactivity rate of 24.6% down to 21.2%. In comparison, the North East saw small rises and falls, and by 2023 it has only seen the inactivity rate decrease by 0.3%. This indicates there has not been uniformity in how each of the region’s inactivity rates have changed across the 8 year period. Potential reasons for this could be differences in educational achievement. Usually, we would expect that if a person is more educated, they will have more employment opportunities with higher wages compared to unskilled labour.
@@ -38,8 +40,6 @@ The inactivity rate across the years has been very volatile for all the regions.
 The graph does show that, with the exception of 2019-2020, the North East consistently had the highest rate of economic inactivity, peaking at 26% in 2022. One could make the argument that given the deindustrialisation that occurred primarily in North East England during the 1980s, as there was a sharp rise in unemployment, we might also expect to see a permanent increase in economic inactivity. Deindustrialisation resulted in more structurally unemployed workers, where they did not have sufficient skills to be able to transfer to say the growing service sector. If they remained unemployed for longer periods, they may have decided to give up on seeking a new job, resulting in them becoming economically inactive. The service sector is also primarily focused in London and the South East, so it is possible that geographical immobility of labour, where factors like poor transport links prevent workers from moving to new areas for employment, contributed to a consistently higher economic inactivity rate in the North East compared to the South East.
 
 Sources
-
-Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/economic-inactivity-rate
 
 [1] https://commonslibrary.parliament.uk/the-uk-labour-market/
 
@@ -52,7 +52,9 @@ across the UK’s different regions. Yet, there is not a clear downwards trend f
 quite volatile between the years, so we cannot conclude with certainty that over the whole period the gap 
 in economic inactivity between the regions has consistently been decreasing, rather it has varied a lot."""
 
-    ANALYSIS_STATS_PRODUCTIVITY = """This line graph shows the changes to labour productivity across each of the UK’s regions. Productivity is a measure of essentially how much output is produced in a given period of time. If we hold all of our inputs constant, but a worker’s productivity rises, output will increase despite no change in inputs. Higher productivity levels lead to more goods and services being produced by the economy, often leading to real GDP growth.
+    ANALYSIS_STATS_PRODUCTIVITY = """ Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/gross-value-added-per-hour-worked
+    
+This line graph shows the changes to labour productivity across each of the UK’s regions. Productivity is a measure of essentially how much output is produced in a given period of time. If we hold all of our inputs constant, but a worker’s productivity rises, output will increase despite no change in inputs. Higher productivity levels lead to more goods and services being produced by the economy, often leading to real GDP growth.
 The data shows that broadly all of the regions experienced a gradual improvement in their levels of productivity between 2016 and 2023. Normally, economists tend to associate improvements to productivity as being down to perhaps improved skills training or reducing geographical immobility of labour (for example, improving transport infrastructure in rural areas so it is easier for people to access areas with better employment opportunities). Most importantly, a rise in the total factor productivity of the economy (z), which signifies technological progress, such as the implementation of artificial intelligence perhaps, is likely to cause significant productivity increases.
 
 There have been numerous reports since the Global Financial Crisis in 2008 that the UK has a severe issue with productivity. Since 2008, UK productivity has effectively flatlined, with average productivity growth being 0.6% between 2009 to 2023. In contrast, between 1971-2007, UK productivity growth was 2.2% [1]. There have been a multitude of reasons, ranging from frequent economic shocks like Brexit and COVID to the short lifespan of recent governments, causing frequent policy changes that lead to uncertainty and thus lower levels of private sector investment.
@@ -62,8 +64,6 @@ Additionally, the range is quite large here. By the end of the period, the range
 London acts as the UK’s financial centre and the main focus of multinational corporations. These are often sectors employing highly skilled workers who use large levels of capital like computers and artificial intelligence to boost their productivity. By contrast, Wales remains fairly agricultural, and is more reliant on sectors like tourism which do not use so much capital, likely leading to lower levels of productivity as there is a much lower ratio between labour and capital in these sorts of sectors. As a result of this, it is unsurprising the productivity gap is so large, indicating that there needs to be some effective Government policy if this regional inequality is to be reduced, as market forces do not seem to be capable of solving this issue.  
 
 Sources:
-
-Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/gross-value-added-per-hour-worked
 
 [1] https://post.parliament.uk/economic-growth-and-productivity/
 
@@ -107,8 +107,13 @@ Additionally, the last few years have seen a severe rise in the usage of artific
 Ultimately, while we definitely need to be aware of some potential problems with the scatter plot, such as the low sample size and possibility of other factors, the strength of the correlation suggests it might be reasonable to suggest that a rise in productivity does correspond to a rise in the median wage.
 """
 
+    RAW_DATA_MEDIAN_PAY = """Raw data: https://www.ons.gov.uk/filters/412e9c37-c103-4622-ab45-1efe6bf0d15b/dimensions
+     """
 
+    RAW_DATA_INACTIVITY = """Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/economic-inactivity-rate """
 
+    RAW_DATA_PRODUCTIVITY = """Raw data: https://www.ons.gov.uk/explore-local-statistics/indicators/gross-value-added-per-hour-worked """
+    
     def __init__(self, statistic, scatter_plot):
         self.scatter_plot = scatter_plot
         self.statistic = statistic
@@ -141,3 +146,12 @@ Ultimately, while we definitely need to be aware of some potential problems with
         else: return None
 
 
+    def get_bar_or_map_analysis(self):
+        if self.statistic == DataMerge.STATS_MEDIAN_PAY:
+            return MyAnalysis.RAW_DATA_MEDIAN_PAY
+        elif self.statistic == DataMerge.STATS_INACTIVITY:
+            return MyAnalysis.RAW_DATA_INACTIVITY
+        elif self.statistic == DataMerge.STATS_PRODUCTIVITY:
+            return MyAnalysis.RAW_DATA_PRODUCTIVITY
+        else:
+            return None

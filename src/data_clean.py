@@ -14,13 +14,13 @@ class DataClean:
   # are used throughout the project
   median_pay_title = "UK Regional Median Annual Gross Pay"
   median_pay_colname = "Median Pay"
-  median_pay_percent_change_colname = "Percentage change in median pay compared to 2016"
+  median_pay_percent_change_colname = """% change in median pay compared to 2016"""
   inactivity_title = "Economic inactivity percentage"
   inactivity_colname = "Inactivity"
-  inactivity_percent_change_colname = "Percentage change in economic inactivity rate compared to 2016"
+  inactivity_percent_change_colname = """% change in inactivity rate compared to 2016"""
   productivity_title = "Labour productivity in £ per hour worked in the UK"
   productivity_colname = "Productivity"
-  productivity_percent_change_colname = "Percentage change in productivity compared to 2016"
+  productivity_percent_change_colname = """% change in productivity compared to 2016"""
 
   # This constructor takes the DataRaw object which holds the raw pandas dataframes#
   # This stores a copy locally in this class
