@@ -24,8 +24,8 @@ class MyMap:
         # "Turbo" alters the colour scale used on the mpa to make the difference clearer
         self.map = px.choropleth(df_year, 
                     geojson= myGeoJson,
-                    locations = "Region code" , 
-                    featureidkey = "properties.Region_code", 
+                    locations = "Region" , 
+                    featureidkey = "properties.Region", 
                     color = stats_colName ,
                     range_color=(min_value, max_value),
                     color_continuous_scale="Turbo",
